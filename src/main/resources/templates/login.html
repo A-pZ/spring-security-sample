@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Login page</title>
+<meta charset="utf-8" />
+<link  th:replace="layouts/base_template :: bootstrap()" />
+</head>
+<body>
+
+	<nav th:replace="layouts/base_template :: navi()"></nav>
+	<div class="container">
+		<div class="alert alert-warning" role="alert" th:if="${loginError}">ユーザ名またはパスワードが違います</div>
+		<form th:action="@{/login}" method="post">
+			<div class="form-group">
+				<label for="username">Username</label>
+				<input type="text" class="form-control" id="username" name="username" autofocus="autofocus" />
+			</div>
+
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" class="form-control" id="password" name="password" />
+			</div>
+
+			<input type="submit" class="btn btn-primary" value="ログイン" />
+		</form>
+	</div>
+	<script th:replace="layouts/base_template :: jquery()"></script>
+	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>
+</body>
+</html>
