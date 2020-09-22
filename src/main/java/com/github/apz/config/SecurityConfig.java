@@ -1,13 +1,11 @@
 package com.github.apz.config;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 /**
  * SpringSecurity設定。
@@ -16,28 +14,29 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  *
  */
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests(
 					(authorize) -> authorize
-					.antMatchers("/webjars/**","/index","/static/**").permitAll()
-					.antMatchers("/upload/**").hasRole("USER")
-				).formLogin(
-					(formLogin) -> formLogin
-					.loginPage("/login")
-					.failureUrl("/login-error")
-				);
+					.antMatchers("/webjars/**","/", "/index","/static/**","/error").permitAll()
+					.anyRequest().authenticated()
+			)
+			.logout(logout -> logout.logoutSuccessUrl("/logout").permitAll())
+
+			.exceptionHandling(h -> h.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+			.oauth2Login();
 	}
 
-	@Bean
-	protected UserDetailsService userDetailsService() {
-		UserDetails userDetails = User.withDefaultPasswordEncoder()
-				.username("user")
-				.password("password")
-				.roles("USER")
-				.build();
-		return new InMemoryUserDetailsManager(userDetails);
-	}
+//	@Bean
+//	protected UserDetailsService userDetailsService() {
+//		UserDetails userDetails = User.withDefaultPasswordEncoder()
+//				.username("user")
+//				.password("password")
+//				.roles("USER")
+//				.build();
+//		return new InMemoryUserDetailsManager(userDetails);
+//	}
 }

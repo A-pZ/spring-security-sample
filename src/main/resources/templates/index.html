@@ -9,10 +9,14 @@
 </head>
 <body>
 	<nav th:replace="layouts/base_template :: navi()"></nav>
-	<form method="get" action="upload/index">
-		<div class="alert alert-warning" role="alert" th:if="${loginError}">ユーザ名またはパスワードが違います</div>
+	<form method="get" action="/oauth2/authorization/github">
 		<div class="container">
-			<button type="submit" class="btn btn-primary">アップロード機能を使う</button>
+			<button type="submit" class="btn btn-primary">ログイン</button>
+		</div>
+	</form>
+	<form method="post" th:action="@{/logout}">
+		<div class="container">
+			<button type="submit" class="btn btn-primary">ログアウト</button>
 		</div>
 	</form>
 	<script th:replace="layouts/base_template :: jquery()"></script>
