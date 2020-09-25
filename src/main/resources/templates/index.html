@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport"
@@ -9,16 +9,25 @@
 </head>
 <body>
 	<nav th:replace="layouts/base_template :: navi()"></nav>
-	<form method="get" action="/oauth2/authorization/github">
-		<div class="container">
-			<button type="submit" class="btn btn-primary">ログイン</button>
-		</div>
-	</form>
-	<form method="post" th:action="@{/logout}">
-		<div class="container">
-			<button type="submit" class="btn btn-primary">ログアウト</button>
-		</div>
-	</form>
+	<div class="container">
+		<sec:div sec:authorize="!isAuthenticated()">
+		<form method="get" action="/oauth2/authorization/google">
+			<button type="submit" class="btn btn-primary">Googleでログイン</button>
+		</form>
+		</sec:div>
+
+		<sec:div sec:authorize="isAuthenticated()">
+		<div th:text="${#authentication.principal.attributes.family_name}" ></div>
+		<div th:text="${#authentication.principal.attributes.given_name}" ></div>
+		<div th:text="${#authentication.principal.attributes.email}" ></div>
+
+		<form method="post" th:action="@{/logout}">
+			<div class="container">
+				<button type="submit" class="btn btn-primary">ログアウト</button>
+			</div>
+		</form>
+		</sec:div>
+	</div>
 	<script th:replace="layouts/base_template :: jquery()"></script>
 	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>
 </body>

@@ -22,6 +22,9 @@ spring:
           github:
             clientId: XXX
             clientSecret: XXX
+          google:
+            clientId: google-client-id
+            clientSecret: google-client-secret
   
 logging:
   level:
