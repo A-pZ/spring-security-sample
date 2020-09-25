@@ -15,6 +15,13 @@ spring:
     static-locations:
     - classpath:/static/
     - file:/var/file/
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: XXX
+            clientSecret: XXX
   
 logging:
   level:

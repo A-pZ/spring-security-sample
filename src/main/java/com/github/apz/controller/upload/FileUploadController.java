@@ -46,7 +46,7 @@ public class FileUploadController {
 
 		try (InputStream uploadStream = multipartFile.getInputStream()){
 			String filename = multipartFile.getOriginalFilename();
-			FileOutputStream fos = new FileOutputStream(new File("/var/file/" + filename));
+			FileOutputStream fos = new FileOutputStream(new File("/var/file/upload_images/" + filename));
 			IOUtils.copyLarge(uploadStream, fos);
 			mnv.addObject("uploadFileName", filename);
 		} catch (IOException e) {

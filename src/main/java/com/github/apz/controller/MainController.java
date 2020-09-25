@@ -27,4 +27,9 @@ public class MainController {
 		model.addAttribute("loginError", true);
 		return "login";
 	}
+
+	@RequestMapping("/logout")
+	public String logout(Model model) {
+		return "index";
+	}
 }
