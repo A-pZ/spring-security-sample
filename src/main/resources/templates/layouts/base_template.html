@@ -20,9 +20,11 @@
 				<li class="nav-item active"><a class="nav-link" href="#">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#" th:href=".">title here</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" th:href="@{/upload/index}">アップロード</a></li>
 			</ul>
 		</div>
+
+
 	</nav>
 	<script th:fragment="jquery()" th:src="@{/webjars/jquery/{version}/jquery.min.js(version=${@webjarsConfig.jquery})}"></script>
 	<script th:fragment="bootstrap_jquery()" th:src="@{/webjars/bootstrap/{version}/js/bootstrap.min.js(version=${@webjarsConfig.bootstrap})}"></script>
