@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport"
@@ -10,12 +10,8 @@
 <body>
 	<nav th:replace="layouts/base_template :: navi()"></nav>
 	<div class="container">
-		<form method="get" th:action="@{/login}">
-			<button type="submit" class="btn btn-primary">ログイン</button>
-		</form>
-		<form method="post" th:action="@{/logout}">
-			<button type="submit" class="btn btn-primary">ログアウト</button>
-		</form>
+		<div th:replace="layouts/base_template :: authButton()">
+		</div>
 	</div>
 	<script th:replace="layouts/base_template :: jquery()"></script>
 	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>

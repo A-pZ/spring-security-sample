@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -24,8 +24,15 @@
 			</ul>
 		</div>
 
-
 	</nav>
+	<div th:fragment="authButton()">
+		<form method="get" th:action="@{/oauth2/authorization/google}" sec:authorize="!isAuthenticated()">
+			<button type="submit" class="btn btn-primary">Googleアカウントでログイン</button>
+		</form>
+		<form method="post" th:action="@{/logout}" sec:authorize="isAuthenticated()">
+			<button type="submit" class="btn btn-primary">ログアウト</button>
+		</form>
+	</div>
 	<script th:fragment="jquery()" th:src="@{/webjars/jquery/{version}/jquery.min.js(version=${@webjarsConfig.jquery})}"></script>
 	<script th:fragment="bootstrap_jquery()" th:src="@{/webjars/bootstrap/{version}/js/bootstrap.min.js(version=${@webjarsConfig.bootstrap})}"></script>
 </body>

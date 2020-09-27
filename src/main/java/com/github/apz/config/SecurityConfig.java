@@ -27,6 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout(logout -> logout.logoutSuccessUrl("/logout").permitAll())
 
 			.exceptionHandling(h -> h.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-			.oauth2Login();
+			.oauth2Login().defaultSuccessUrl("/index");
 	}
 }
