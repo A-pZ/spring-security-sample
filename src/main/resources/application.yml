@@ -2,11 +2,11 @@ webjars:
   bootstrap: "4.5.2"
   jquery: "3.5.1"
 spring:
-  datasource:
-    url: "jdbc:mysql://127.0.0.1/test?serverTimezone=JST"
-    username: "root"
-    password: "password"
-    driver-class-name: "com.mysql.jdbc.Driver"
+#  datasource:
+#    url: "jdbc:mysql://127.0.0.1/test?serverTimezone=JST"
+#    username: "root"
+#    password: "password"
+#    driver-class-name: "com.mysql.jdbc.Driver"
   thymeleaf:
     cache: false
   resources:

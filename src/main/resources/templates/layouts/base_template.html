@@ -7,7 +7,7 @@
 </head>
 <body>
 	<nav th:fragment="navi()" class="navbar navbar-expand-lg navbar-light bg-light" >
-		<a class="navbar-brand" href="#" th:href="@{/}">spring-thymeleaf-sample</a>
+		<a class="navbar-brand" href="#" th:href="@{/}">image-uploader</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -17,22 +17,21 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">Home
+				<li class="nav-item active"><a class="nav-link" th:href="@{/}">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#" th:href="@{/upload/index}">アップロード</a></li>
+				<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" href="#" th:href="@{/upload/index}">アップロード</a></li>
 			</ul>
 		</div>
-
-	</nav>
-	<div th:fragment="authButton()">
-		<form method="get" th:action="@{/oauth2/authorization/google}" sec:authorize="!isAuthenticated()">
+		<form method="get" class="my-2 my-lg-0" th:action="@{/oauth2/authorization/google}" sec:authorize="!isAuthenticated()">
 			<button type="submit" class="btn btn-primary">Googleアカウントでログイン</button>
 		</form>
-		<form method="post" th:action="@{/logout}" sec:authorize="isAuthenticated()">
-			<button type="submit" class="btn btn-primary">ログアウト</button>
+		<form method="post" class="my-2 my-lg-0 form-inline" th:action="@{/logout}" sec:authorize="isAuthenticated()">
+			<div th:text="${#authentication.principal.attributes.name}"></div>
+			<div th:text="'(' + ${#authentication.principal.attributes.email} + ')'"></div>
+			<button type="submit" class="btn btn-success">ログアウト</button>
 		</form>
-	</div>
+	</nav>
 	<script th:fragment="jquery()" th:src="@{/webjars/jquery/{version}/jquery.min.js(version=${@webjarsConfig.jquery})}"></script>
 	<script th:fragment="bootstrap_jquery()" th:src="@{/webjars/bootstrap/{version}/js/bootstrap.min.js(version=${@webjarsConfig.bootstrap})}"></script>
 </body>

@@ -16,7 +16,7 @@
 			<input type="file" name="file" >
 			<button type="submit" class="btn btn-primary">アップロード機能を使う</button>
 		</form>
-		<img th:if="${uploadFileName}" th:src="@{/upload_images/{filename}(filename=${uploadFileName})}" width="320"/>
+		<img th:if="${uploadFileName}" th:src="@{/upload_images/{filename}(filename=${uploadFileName})}" class="rounded" width="320"/>
 	</div>
 	<script th:replace="layouts/base_template :: jquery()"></script>
 	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>
