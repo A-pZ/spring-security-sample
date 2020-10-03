@@ -13,7 +13,8 @@
 	<artifactId>spring-security-sample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-security-sample</name>
-	<description>spring-jpa-sample</description>
+	<description>spring-security-sample(with Google OAuth2)</description>
+	<packaging>war</packaging>
 
 	<properties>
 		<java.version>11</java.version>
@@ -36,6 +37,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
 <!-- 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
